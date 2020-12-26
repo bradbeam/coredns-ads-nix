@@ -1,0 +1,12 @@
+diff --git a/plugin.cfg b/plugin.cfg
+index 1c1bdfd7..7180ce26 100644
+--- a/plugin.cfg
++++ b/plugin.cfg
+@@ -47,6 +47,7 @@ dnssec:dnssec
+ autopath:autopath
+ template:template
+ transfer:transfer
++ads:github.com/c-mueller/ads
+ hosts:hosts
+ route53:route53
+ azure:azure
