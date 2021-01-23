@@ -1,7 +1,7 @@
 with import <nixpkgs> { };
 
 buildGoModule rec {
-  pname = "coredns";
+  pname = "coredns-ads";
   version = "1.8.1";
 
   src = fetchFromGitHub {
@@ -11,7 +11,7 @@ buildGoModule rec {
     sha256 = "04hkz70s5i7ndwyg39za3k83amvmi90rkjm8qp3w3a8fbmq4q4y6";
   };
 
-  vendorSha256 = "1f4kikra3b67ipvwbw9yxr575q1pbgakdnp28naz007vh1rg8qf8";
+  vendorSha256 = "1h1xcygwvpm4m6wlrv62x3kzrygc3yhydcmnvnds0bmkdga3y975";
 
   doCheck = false;
 
@@ -20,25 +20,14 @@ buildGoModule rec {
     ./ads-plugin.patch
   ];
 
-  #overrideModAttrs = (old: {
-  #  preConfigure = ''
-  #    go mod edit -require=github.com/c-mueller/ads@v0.2.5-0.20201010140624-51e1b415ae8f
-  #    go generate
-  #  '';
-  #});
-
-  #preConfigure = ''
-  #  go mod edit -require=github.com/c-mueller/ads@v0.2.5-0.20201010140624-51e1b415ae8f
-  #  go generate
-  #'';
-
   overrideModAttrs = (old: {
     preBuild = ''
-      go mod edit -require=github.com/ooesili/coredns-docker@a1ebae1be1170a0a7673ca0a4b57ff2aed238d51
+      go mod edit -require=github.com/c-mueller/ads@v0.2.5-0.20201010140624-51e1b415ae8f
     '';
   });
+
   preBuild = ''
-    sed -i '/^hosts:/a docker:github.com/ooesili/coredns-docker/docker' plugin.cfg
+    #sed -i '/^transfer:/a ads:github.com/c-mueller/ads' plugin.cfg
     go generate
   '';
 
